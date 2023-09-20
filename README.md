@@ -115,3 +115,4 @@ Executed graph inference
    5.) [953](9.4834)pineapple, ananas
 ```
 
+## regular pytorch mobilenet vs onnx mobilenet vs pytorch mobile mobilenet
