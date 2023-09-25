@@ -1,5 +1,3 @@
-# pytorch-conference
-
 ## Pytorch WASI NN Mobilenet example: 
 1. 
 ```
