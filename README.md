@@ -1,1 +1,1 @@
-# Pytorch Conference Poster Submission. 
+# Pytorch Conference Poster Submission
