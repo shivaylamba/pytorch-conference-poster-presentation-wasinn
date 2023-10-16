@@ -1,0 +1,1 @@
+This code is adpated from and follows the same structure as https://github.com/taichi-dev/taichi-nerfs.
