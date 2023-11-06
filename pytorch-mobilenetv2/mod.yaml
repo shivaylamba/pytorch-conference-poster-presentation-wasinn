@@ -1,0 +1,186 @@
+validate:
+  allow_wasi: true
+  imports:
+    include:
+    - namespace: wasi_snapshot_preview1
+      name: args_get
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: args_sizes_get
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: clock_time_get
+      params:
+      - I32
+      - I64
+      - I32
+      results:
+      - I32
+    - namespace: wasi_ephemeral_nn
+      name: compute
+      params:
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: environ_get
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: environ_sizes_get
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: fd_close
+      params:
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: fd_filestat_get
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: fd_prestat_dir_name
+      params:
+      - I32
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: fd_prestat_get
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: fd_read
+      params:
+      - I32
+      - I32
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: fd_seek
+      params:
+      - I32
+      - I64
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: fd_write
+      params:
+      - I32
+      - I32
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_ephemeral_nn
+      name: get_output
+      params:
+      - I32
+      - I32
+      - I32
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_ephemeral_nn
+      name: init_execution_context
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_ephemeral_nn
+      name: load_by_name
+      params:
+      - I32
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: path_open
+      params:
+      - I32
+      - I32
+      - I32
+      - I32
+      - I32
+      - I64
+      - I64
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: proc_exit
+      params:
+      - I32
+      results: []
+    - namespace: wasi_snapshot_preview1
+      name: random_get
+      params:
+      - I32
+      - I32
+      results:
+      - I32
+    - namespace: wasi_snapshot_preview1
+      name: sched_yield
+      params: []
+      results:
+      - I32
+    - namespace: wasi_ephemeral_nn
+      name: set_input
+      params:
+      - I32
+      - I32
+      - I32
+      results:
+      - I32
+    namespace:
+      include:
+      - wasi_snapshot_preview1
+      - wasi_ephemeral_nn
+  exports:
+    include:
+    - name: __main_void
+      params: []
+      results:
+      - I32
+    - name: _start
+      params: []
+      results: []
+    max: 2
+  size:
+    max: 2.5 MiB
+  complexity:
+    max_risk: medium
+
+
+
