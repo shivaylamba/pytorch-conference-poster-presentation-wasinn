@@ -1,10 +1,14 @@
-use dylibso_observe_sdk::adapter::otelstdout::OtelStdoutAdapter;
+use dylibso_observe_sdk::adapter::{
+    otel_formatter::Value, otelstdout::OtelStdoutAdapter, AdapterMetadata::OpenTelemetry, Attribute,
+};
+use wasmtime::Val;
 
 #[tokio::main]
 pub async fn main() -> anyhow::Result<()> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     let data = std::fs::read(&args[0])?;
-    let function_name = "_start";
+    let left: i32 = args[1].parse()?;
+    let right: i32 = args[2].parse()?;
     let config = wasmtime::Config::new();
 
     // Create instance
@@ -35,10 +39,25 @@ pub async fn main() -> anyhow::Result<()> {
     // as the function is running
 
     let f = instance
-        .get_func(&mut store, function_name)
+        .get_func(&mut store, "add")
         .expect("function exists");
 
-    f.call(&mut store, &[], &mut []).unwrap();
+    let mut out = [Val::I32(0)];
+    f.call(&mut store, &[Val::I32(left), Val::I32(right)], &mut out)?;
+    // check if the value from the wasm function is "too big", and if so add some metadata to the trace
+    if let Some(solution) = out[0].i32() {
+        if solution > 10 {
+            trace_ctx
+                .set_metadata(OpenTelemetry(vec![Attribute {
+                    key: "problem-too-hard".into(),
+                    value: Value {
+                        string_value: None,
+                        int_value: Some(solution as i64),
+                    },
+                }]))
+                .await
+        }
+    }
 
     trace_ctx.shutdown().await;
 
